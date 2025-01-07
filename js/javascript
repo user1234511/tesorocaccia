@@ -1,0 +1,34 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Inizializza la mappa centrata su Arpino
+    const map = L.map('map').setView([41.6482, 13.6099], 14);
+    
+    // Aggiungi il layer della mappa
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Array dei punti di interesse
+    const locations = [
+        {
+            name: "Tappa 1 - La Poiana",
+            coords: [41.6482, 13.6099],
+            description: "Osservazione dei rapaci"
+        },
+        {
+            name: "Tappa 2 - L'Acropoli",
+            coords: [41.6490, 13.6110],
+            description: "Storia antica di Arpino"
+        }
+        // Puoi aggiungere altre tappe qui
+    ];
+
+    // Aggiungi i marker sulla mappa
+    locations.forEach(location => {
+        L.marker(location.coords)
+            .bindPopup(`
+                <h3>${location.name}</h3>
+                <p>${location.description}</p>
+            `)
+            .addTo(map);
+    });
+});
